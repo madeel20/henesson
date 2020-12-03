@@ -1,0 +1,70 @@
+.c-sidebar{
+    background: $c-theme-background;
+    position: fixed;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 600px;
+    z-index: 999;
+    flex-direction: column;
+    padding: 0px;
+    display: none;
+    transition: 1s;
+    .cross-icon{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        margin: 15px 15px 0px 0px ;
+        cursor: pointer;
+    }
+    .profile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 15px 0px 15px 40px;
+        .profile-icon{
+            width: 56px;
+        }
+        .profile-title {
+            font-size: $c-heading-size;
+            margin: 0px 0px 0px 10px;
+        }
+    }
+    .category-list{
+        flex:1;
+        background: $white-color;
+        padding: 10px 0px 0px 0px;
+        height: 100%;
+        h2{
+            font-size: $c-heading-size;
+            color: $c-grey-clr;
+            margin: 10px 0px 10px 30px;
+            font-weight: bold ;
+        }
+        .category-content{
+            display: flex;
+            flex-direction: row;
+            flex:1;
+            justify-content: space-between;
+            align-items: center;
+            padding:5px 40px 5px 50px;
+            .category {
+                .category-title{
+                    color: $black-color;
+                    font-size: $c-heading-size;
+                }
+            }
+            .arrow-icon{
+                width: 12px;
+                height: 20px;
+            }
+            &:hover{
+                background: #E7E7E8;
+            }
+        }
+    }
+    .show{
+        display: block;
+    }
+}

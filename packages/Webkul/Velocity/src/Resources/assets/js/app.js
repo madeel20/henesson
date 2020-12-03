@@ -40,6 +40,7 @@ Vue.component("add-to-cart", require("./UI/components/add-to-cart"));
 Vue.component('star-ratings', require('./UI/components/star-rating'));
 Vue.component('quantity-btn', require('./UI/components/quantity-btn'));
 Vue.component('sidebar-component', require('./UI/components/sidebar'));
+Vue.component('c-sidebar-component', require('./UI/components/c-sidebar'));
 Vue.component("product-card", require("./UI/components/product-card"));
 Vue.component("wishlist-component", require("./UI/components/wishlist"));
 Vue.component('carousel-component', require('./UI/components/carousel'));
