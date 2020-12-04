@@ -1,11 +1,15 @@
 <template>
+    <div>
+
     <!-- categories list -->
+    <div id="sidebar-backdrop" :class="`sidebar-backdrop ${addClass ? 'show' : ''}`"></div>
     <nav
         :id="id"
         @mouseover="remainBar(id)"
         :class="`c-sidebar ${addClass ? addClass : ''}`"
         v-if="slicedCategories && slicedCategories.length > 0">
-        <img onClick="$('#c-sidebar').removeClass('show')" class="cross-icon" :src="`${$root.baseUrl}/themes/velocity/assets/images/cross-sign.png`" />
+        <div class="c-sidebar-content">
+        <img onClick="$('#c-sidebar, #sidebar-backdrop').removeClass('show')" class="cross-icon" :src="`${$root.baseUrl}/themes/velocity/assets/images/cross-sign.png`" />
         <div class="profile" >
             <img class="profile-icon" :src="`${$root.baseUrl}/themes/velocity/assets/images/profile-icon.png`" />
             <span class="profile-title "> Hello, Faizan</span>
@@ -101,7 +105,10 @@
 
             </li>
         </ul>
+        </div>
     </nav>
+    </div>
+
 </template>
 
 <script type="text/javascript">
