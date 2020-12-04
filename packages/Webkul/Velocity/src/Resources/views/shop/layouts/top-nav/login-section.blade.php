@@ -5,7 +5,6 @@
 <script type="text/x-template" id="login-header-template">
     <div class="dropdown">
         <div id="account">
-
             <div class="welcome-content pull-right" @click="togglePopup">
                 <i class="material-icons align-vertical-top">perm_identity</i>
                 <span class="text-center">
@@ -20,7 +19,6 @@
                 <span class="select-icon rango-arrow-down"></span>
             </div>
         </div>
-
         <div class="account-modal sensitive-modal hide mt5">
             <!--Content-->
                 @guest('customer')
@@ -33,12 +31,10 @@
                                 <span aria-hidden="true" class="white-text fs20" @click="togglePopup">×</span>
                             </button>
                         </div>
-
                         <!--Body-->
                         <div class="pl10 fs14">
                             <p>{{ __('shop::app.header.dropdown-text') }}</p>
                         </div>
-
                         <!--Footer-->
                         <div class="modal-footer">
                             <div>
@@ -89,7 +85,7 @@
                             @php
                                 $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
                             @endphp
-                            
+
                             @if ($showCompare)
                                 <li>
                                     <a href="{{ route('velocity.customer.product.compare') }}" class="unset">{{ __('velocity::app.customer.compare.text') }}</a>
@@ -117,9 +113,6 @@
                 togglePopup: function (event) {
                     let accountModal = this.$el.querySelector('.account-modal');
                     let modal = $('#cart-modal-content')[0];
-
-                    if (modal)
-                        modal.classList.add('hide');
 
                     accountModal.classList.toggle('hide');
 

@@ -1,1 +1,29 @@
 @import "sidebar";
+
+.sticky-header {
+    background-color: #131921 !important;
+    padding:5px 0px 0px 5px !important;
+    color: white !important;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    .searchbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex: 1;
+        .input-group {
+            width: auto !important;
+        }
+        .mini-cart-container{
+            .dropdown{
+                    button {
+                        i,span{
+                            color:white;
+                        }
+                    }
+            }
+        }
+    }
+}
