@@ -9,21 +9,38 @@
         align-items: center;
         z-index: 120;
         .dropdown {
+            cursor: pointer;
             padding-top: 10px;
-
             .welcome-content {
                 display: flex;
                 justify-content: space-between;
                 width: 100px;
             }
-
             .account-modal {
                 position: absolute;
                 top: 54px;
                 left: -43px;
                 .modal-content {
                     width: 175px;
-
+                    padding: 0px;
+                    ul{
+                        color: $black-color;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 10px 0px 0px 0px;
+                        li {
+                            padding: 5px;
+                            width: 100%;
+                            text-align: center;
+                            font-size: $font-size-h6;
+                            &:hover{
+                                background-color: $c-theme-background;
+                                color: $white-color;
+                            }
+                        }
+                    }
                     .modal-footer {
                         flex-direction: column;
 
