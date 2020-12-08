@@ -26,15 +26,11 @@
                         <!--Header-->
                         <div class="modal-header no-border pb0">
                             <label class="fs18 grey">{{ __('shop::app.header.title') }}</label>
-
                             <button type="button" class="close disable-box-shadow" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text fs20" @click="togglePopup">×</span>
                             </button>
                         </div>
                         <!--Body-->
-                        <div class="pl10 fs14">
-                            <p>{{ __('shop::app.header.dropdown-text') }}</p>
-                        </div>
                         <!--Footer-->
                         <div class="modal-footer">
                             <div>
@@ -113,9 +109,7 @@
                 togglePopup: function (event) {
                     let accountModal = this.$el.querySelector('.account-modal');
                     let modal = $('#cart-modal-content')[0];
-
                     accountModal.classList.toggle('hide');
-
                     event.stopPropagation();
                 }
             }

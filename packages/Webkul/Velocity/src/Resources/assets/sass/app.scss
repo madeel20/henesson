@@ -10,7 +10,7 @@
 @import "components/product-view";
 @import "components/media";
 @import "components/rtl";
-@import "custom/index";
+
 @import "static/material-icons";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
@@ -978,3 +978,4 @@ i.within-circle {
 }
 
 .row:before, .row:after {display: none !important;}
+@import "custom/index";

@@ -1,29 +1,98 @@
-@import "sidebar";
-
-.sticky-header {
-    background-color: #131921 !important;
-    padding:5px 0px 0px 5px !important;
-    color: white !important;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    .searchbar {
+.main-container-wrapper {
+    .sticky-header {
+        background-color: #131921 !important;
+        padding: 5px 0px 0px 5px !important;
+        color: white !important;
+        height: 70px;
         display: flex;
-        flex-direction: row;
+        justify-content: space-around;
         align-items: center;
-        justify-content: space-between;
-        flex: 1;
-        .input-group {
-            width: auto !important;
-        }
-        .mini-cart-container{
-            .dropdown{
-                    button {
-                        i,span{
-                            color:white;
+        z-index: 120;
+        .dropdown {
+            padding-top: 10px;
+
+            .welcome-content {
+                display: flex;
+                justify-content: space-between;
+                width: 100px;
+            }
+
+            .account-modal {
+                position: absolute;
+                top: 54px;
+                left: -43px;
+                .modal-content {
+                    width: 175px;
+
+                    .modal-footer {
+                        flex-direction: column;
+
+                        .btn-container {
+                            width: 100%;
+                            padding: 5px;
                         }
                     }
+                }
+            }
+        }
+        .mini-cart-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .dropdown {
+                padding-top: 0px;
+
+                span, i {
+                    color: $white-color;
+                }
+
+                .cart-icon {
+                    width: 30px;
+                }
+            }
+        }
+        .locale-container {
+            .dropdown {
+                display: flex;
+                width: 100px;
+                padding: 5px;
+
+                img {
+                    width: 30px;
+                }
+            }
+
+            .select-icon-container {
+                display: flex;
+                align-items: center;
+
+                .btn-link {
+                    color: $white-color;
+                    pointer-events: none;
+                    opacity: 1;
+                }
+
+                .select-icon {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                }
             }
         }
     }
 }
+
+    .c-button {
+        background: rgb(253,187,45);
+        background: linear-gradient(0deg, rgba(253,187,45,1) 0%, rgba(246,206,120,1) 100%);
+        color: $white-color !important;
+        box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+        border: none;
+        width:100%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    @import "searchbar";
+    @import "sidebar";
