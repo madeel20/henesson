@@ -1,7 +1,7 @@
 @php
     $velocityHelper = app('Webkul\Velocity\Helpers\Helper');
     $velocityMetaData = $velocityHelper->getVelocityMetaData();
-    
+
     view()->share('velocityMetaData', $velocityMetaData);
 @endphp
 
@@ -18,6 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/velocity.css') }}" />
+        <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/custom.css') }}" />
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/bootstrap.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('themes/velocity/assets/css/google-font.css') }}" />
 
@@ -75,12 +76,13 @@
 
             <div class="main-container-wrapper">
 
-                @section('body-header')
-                    @include('shop::layouts.top-nav.index')
+               @section('body-header')
+
+
 
                     {!! view_render_event('bagisto.shop.layout.header.before') !!}
 
-                        @include('shop::layouts.header.index')
+                       @include('shop::layouts.header.index')
 
                     {!! view_render_event('bagisto.shop.layout.header.after') !!}
 
@@ -89,12 +91,6 @@
                             $velocityContent = app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents();
                         @endphp
 
-                        <content-header
-                            url="{{ url()->to('/') }}"
-                            :header-content="{{ json_encode($velocityContent) }}"
-                            heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
-                            category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
-                        ></content-header>
 
                         <div class="">
                             <div class="row col-12 remove-padding-margin">

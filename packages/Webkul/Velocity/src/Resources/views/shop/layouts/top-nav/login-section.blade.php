@@ -6,19 +6,21 @@
     <div class="dropdown">
         <div id="account">
             <div class="welcome-content pull-right" @click="togglePopup">
-                <i class="material-icons align-vertical-top">perm_identity</i>
+                <!-- <i class="material-icons align-vertical-top">perm_identity</i> -->
                 <span class="text-center">
                     @guest('customer')
-                        {{ __('velocity::app.header.welcome-message', ['customer_name' => trans('velocity::app.header.guest')]) }}!
+                        <span>Hello, Sign in </span>
+                        <p><b>Accounts & List<b><p>
                     @endguest
-
                     @auth('customer')
-                        {{ __('velocity::app.header.welcome-message', ['customer_name' => auth()->guard('customer')->user()->first_name]) }}
+                      <span>Welcome, </span>
+                      <p><b> {{ auth()->guard('customer')->user()->first_name }}<b><p>
                     @endauth
                 </span>
                 <span class="select-icon rango-arrow-down"></span>
             </div>
         </div>
+
         <div class="account-modal sensitive-modal hide mt5">
             <!--Content-->
                 @guest('customer')
@@ -26,29 +28,30 @@
                         <!--Header-->
                         <div class="modal-header no-border pb0">
                             <label class="fs18 grey">{{ __('shop::app.header.title') }}</label>
+
                             <button type="button" class="close disable-box-shadow" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" class="white-text fs20" @click="togglePopup">×</span>
                             </button>
                         </div>
-                        <!--Body-->
+
                         <!--Footer-->
                         <div class="modal-footer">
-                            <div>
+                            <div class="btn-container">
                                 <a href="{{ route('customer.session.index') }}">
                                     <button
-                                        type="button"
-                                        class="theme-btn fs14 fw6">
+                                        type="button "
+                                        class="c-button">
 
                                         {{ __('shop::app.header.sign-in') }}
                                     </button>
                                 </a>
                             </div>
 
-                            <div>
+                            <div class="btn-container">
                                 <a href="{{ route('customer.register.index') }}">
                                     <button
-                                        type="button"
-                                        class="theme-btn fs14 fw6">
+                                        type="button "
+                                        class=" c-button">
                                         {{ __('shop::app.header.sign-up') }}
                                     </button>
                                 </a>
@@ -58,11 +61,11 @@
                 @endguest
 
                 @auth('customer')
-                    <div class="modal-content customer-options">
+                    <div class="modal-content ">
                         <div class="customer-session">
-                            <label class="">
-                                {{ auth()->guard('customer')->user()->first_name }}
-                            </label>
+                            <!--<label class="">
+                                //{{ auth()->guard('customer')->user()->first_name }}
+                            </label>-->
                         </div>
 
                         <ul type="none">
@@ -109,7 +112,12 @@
                 togglePopup: function (event) {
                     let accountModal = this.$el.querySelector('.account-modal');
                     let modal = $('#cart-modal-content')[0];
+
+                    if (modal)
+                        modal.classList.add('hide');
+
                     accountModal.classList.toggle('hide');
+
                     event.stopPropagation();
                 }
             }

@@ -10,9 +10,8 @@
         id="mini-cart"
         @click="toggleMiniCart"
         :class="`btn btn-link disable-box-shadow ${itemCount == 0 ? 'cursor-not-allowed' : ''}`">
-
         <div class="mini-cart-content">
-            <i class="material-icons-outlined text-down-3">shopping_cart</i>
+            <img class="cart-icon" src="{{ asset('themes/velocity/assets/images/cart.png') }}" />
             <span class="badge" v-text="itemCount" v-if="itemCount != 0"></span>
             <span class="fs18 fw6 cart-text">{{ __('velocity::app.minicart.cart') }}</span>
         </div>
@@ -51,7 +50,7 @@
 
 <script type="text/x-template" id="logo-template">
     <a
-        :class="`left ${addClass}`"
+        :class="` ${addClass}`"
         href="{{ route('shop.home.index') }}">
 
         @if ($logo = core()->getCurrentChannel()->logo_url)
@@ -63,21 +62,14 @@
 </script>
 
 <script type="text/x-template" id="searchbar-template">
-    <div class="row no-margin right searchbar">
-        <div class="col-lg-5 col-md-12 no-padding input-group">
             <form
                 method="GET"
+                class="c-searchbar"
                 role="search"
                 id="search-form"
                 action="{{ route('velocity.search.index') }}">
 
-                <div
-                    class="btn-toolbar full-width"
-                    role="toolbar">
-
-                    <div class="btn-group full-width">
-                        <div class="selectdiv">
-                            <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)">
+                            <select class="form-control fs13 styled-select c-select" name="category" @change="focusInput($event)">
                                 <option value="">
                                     {{ __('velocity::app.header.all-categories') }}
                                 </option>
@@ -96,14 +88,6 @@
                                     </option>
                                 </template>
                             </select>
-
-                            <div class="select-icon-container">
-                                <span class="select-icon rango-arrow-down"></span>
-                            </div>
-                        </div>
-
-                        <div class="full-width">
-
                             <input
                                 required
                                 name="term"
@@ -112,60 +96,11 @@
                                 placeholder="{{ __('velocity::app.header.search-text') }}"
                                 :value="searchedQuery.term ? searchedQuery.term.split('+').join(' ') : ''" />
 
-                            <image-search-component></image-search-component>
-
                             <button class="btn" type="submit" id="header-search-icon">
                                 <i class="fs16 fw6 rango-search"></i>
                             </button>
-                        </div>
-                    </div>
                 </div>
-
             </form>
-        </div>
-
-        <div class="col-lg-7 col-md-12">
-            {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
-                @include('shop::checkout.cart.mini-cart')
-            {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
-
-            @php
-                $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false
-            @endphp
-
-            {!! view_render_event('bagisto.shop.layout.header.compare.before') !!}
-                @if ($showCompare)
-                    <a
-                        class="compare-btn unset"
-                        @auth('customer')
-                            href="{{ route('velocity.customer.product.compare') }}"
-                        @endauth
-
-                        @guest('customer')
-                            href="{{ route('velocity.product.compare') }}"
-                        @endguest
-                        >
-
-                        <i class="material-icons">compare_arrows</i>
-                        <div class="badge-container" v-if="compareCount > 0">
-                            <span class="badge" v-text="compareCount"></span>
-                        </div>
-                        <span>{{ __('velocity::app.customer.compare.text') }}</span>
-                    </a>
-                @endif
-            {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
-
-            {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
-                    <i class="material-icons">favorite_border</i>
-                    <div class="badge-container" v-if="wishlistCount > 0">
-                        <span class="badge" v-text="wishlistCount"></span>
-                    </div>
-                    <span>{{ __('shop::app.layouts.wishlist') }}</span>
-                </a>
-            {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
-        </div>
-    </div>
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
