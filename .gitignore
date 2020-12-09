@@ -5,8 +5,6 @@
 /public/storage
 /public/css
 /public/js
-/public/vendor
-/public/themes
 /public/fonts
 /vendor
 /data
@@ -24,5 +22,3 @@ package-lock.json
 yarn.lock
 .php_cs.cache
 storage/*.key
-/resources/themes/velocity/*
-/resources/lang/vendor/webkul/admin/*

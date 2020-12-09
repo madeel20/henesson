@@ -30,7 +30,7 @@
         position: relative;
         background: $c-theme-background;
         height: 100%;
-        width: 600px;
+        width: 400px;
         display: flex;
         flex-direction: column;
         padding: 0px;
@@ -40,7 +40,7 @@
             position: absolute;
             right: 0;
             top: 0;
-            width: 20px;
+            width: 15px;
             margin: 15px 15px 0px 0px;
             cursor: pointer;
         }
@@ -62,9 +62,8 @@
         .category-list {
             flex: 1;
             background: $white-color;
-            padding: 10px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;
             height: 100%;
-
             h2 {
                 font-size: $c-heading-size;
                 color: $c-grey-clr;
@@ -81,12 +80,15 @@
                 padding: 5px 40px 5px 50px;
 
                 .category {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex: 1;
                     .category-title {
                         color: $black-color;
                         font-size: $c-heading-size;
                     }
                 }
-
                 .arrow-icon {
                     width: 12px;
                     height: 20px;
@@ -94,6 +96,40 @@
 
                 &:hover {
                     background: #E7E7E8;
+                }
+            }
+            .back-icon-container{
+                display: flex;
+                border-bottom: 0.2px solid #999999;
+                align-items:center;
+                padding: 0px 0px 0px 30px;
+                .icon{
+                    width: 15px;
+                    height: 15px;
+                    cursor: pointer;
+                }
+            }
+            .sub-category-container {
+                .sub-categories {
+                    padding: 10px 0px 0px 100px;
+                    [id^="sidebar-level-link-3"]{
+                        margin-left: 20px;
+                        .category-title{
+                            font-size:$font-size-h4;
+                            color: $grey-clr;
+                        }
+                    }
+                    [id^="sidebar-level-link-2"]{
+                        .category-title{
+                            font-size:$font-size-h3;
+                            color: $black-color;
+                        }
+
+                    }
+                    ul {
+                        color: $black-color;
+                        font-size: $font-size-h6;
+                    }
                 }
             }
         }
@@ -105,6 +141,8 @@
             //left: 0;
         }
     }
+
+
 }
 .sidebar-icon {
     width: 40px;

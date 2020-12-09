@@ -1,6 +1,5 @@
 <template>
     <div>
-
     <!-- categories list -->
     <div id="sidebar-backdrop" :class="`sidebar-backdrop ${addClass ? 'show' : ''}`"></div>
     <nav
@@ -14,97 +13,85 @@
             <img class="profile-icon" :src="`${$root.baseUrl}/themes/velocity/assets/images/profile-icon.png`" />
             <span class="profile-title "> Hello, Faizan</span>
         </div>
-        <ul class="category-list" type="none">
+        <ul class="category-list" type="none" v-if="selectedParentCategory===null">
             <h2> SHOP BY CATEGORY </h2>
             <li
                 :key="categoryIndex"
                 :id="`category-${category.id}`"
                 class="category-content cursor-pointer"
-                @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                @mouseover="toggleSidebar(id, $event, 'mouseover')"
-                v-for="(category, categoryIndex) in slicedCategories">
-                <a
-                    :href="`${$root.baseUrl}/${category.slug}`"
-                    :class="`category unset ${(category.children.length > 0) ? 'fw6' : ''}`">
+                v-for="(category, categoryIndex) in slicedCategories"
 
-                    <div
-                        class="category-icon"
-                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                        @mouseover="toggleSidebar(id, $event, 'mouseover')">
-
-                        <img
-                            v-if="category.category_icon_path"
-                            :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" />
-                    </div>
-
-                    <span class="category-title">{{ category['name'] }}</span>
-
-                    <i
-                        class="rango-arrow-right pr15 pull-right"
-                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                        @mouseover="toggleSidebar(id, $event, 'mouseover')"
-                        v-if="category.children.length && category.children.length > 0">
-                    </i>
-                </a>
-                <img class="arrow-icon" :src="`${$root.baseUrl}/themes/velocity/assets/images/arrow-icon.png`" />
-                <div
-                    class="sub-category-container"
-                    v-if="category.children.length && category.children.length > 0">
-
-                    <div
-                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                        @mouseover="remainBar(`sidebar-level-${sidebarLevel+categoryIndex}`)"
-                        :class="`sub-categories sub-category-${sidebarLevel+categoryIndex} cursor-default`">
-
-                        <nav
-                            class="sidebar"
-                            :id="`sidebar-level-${sidebarLevel+categoryIndex}`"
-                            @mouseover="remainBar(`sidebar-level-${sidebarLevel+categoryIndex}`)">
-
-                            <ul type="none">
-                                <li
-                                    :key="`${subCategoryIndex}-${categoryIndex}`"
-                                    v-for="(subCategory, subCategoryIndex) in category.children">
-
-                                    <a
-                                        :id="`sidebar-level-link-2-${subCategoryIndex}`"
-                                        @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                                        :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}`"
-                                        :class="`category sub-category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`">
-
-                                        <div
-                                            class="category-icon"
-                                            @mouseout="toggleSidebar(id, $event, 'mouseout')"
-                                            @mouseover="toggleSidebar(id, $event, 'mouseover')">
-
-                                            <img
-                                                v-if="subCategory.category_icon_path"
-                                                :src="`${$root.baseUrl}/storage/${subCategory.category_icon_path}`" />
-                                        </div>
-                                        <span class="category-title">{{ subCategory['name'] }}</span>
-                                    </a>
-
-                                    <ul type="none" class="nested">
-                                        <li
-                                            :key="`${childSubCategoryIndex}-${subCategoryIndex}-${categoryIndex}`"
-                                            v-for="(childSubCategory, childSubCategoryIndex) in subCategory.children">
-
-                                            <a
-                                                :id="`sidebar-level-link-3-${childSubCategoryIndex}`"
-                                                :class="`category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`"
-                                                :href="`${$root.baseUrl}/${category.slug}/${subCategory.slug}/${childSubCategory.slug}`">
-                                                <span class="category-title">{{ childSubCategory.name }}</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+            >
+               <div
+                    class="category unset">
+<!--                    <div-->
+<!--                        class="category-icon"-->
+<!--                        @mouseout="toggleSidebar(id, $event, 'mouseout')"-->
+<!--                        @mouseover="toggleSidebar(id, $event, 'mouseover')"-->
+<!--                    >-->
+<!--                        <img-->
+<!--                            v-if="category.category_icon_path"-->
+<!--                            :src="`${$root.baseUrl}/storage/${category.category_icon_path}`" />-->
+<!--                    </div>-->
+                   <a
+                       :href="`${$root.baseUrl}/${category.slug}`"><span class="category-title">{{ category['name'] }}</span></a>
+                   <img class="arrow-icon" :src="`${$root.baseUrl}/themes/velocity/assets/images/arrow-icon.png`"
+                        @click="selectAParentCategory(category)"
+                        v-if="category.children.length && category.children.length > 0"
+                   />
                 </div>
-
             </li>
         </ul>
+            <div class="category-list"   v-else>
+                <div class="back-icon-container">
+                    <img @click="selectAParentCategory(null)" class="icon" :src="`${$root.baseUrl}/themes/velocity/assets/images/left-arrow.png`" />
+                    <h2>{{selectedParentCategory['name']}}</h2>
+                </div>
+            <div
+                class="sub-category-container"
+            >
+                <div
+                    class="sub-categories cursor-default">
+                    <ul type="none">
+                        <li
+                            :key="`${subCategoryIndex}`"
+                            v-for="(subCategory, subCategoryIndex) in selectedParentCategory.children">
+                            <a
+                                :id="`sidebar-level-link-2-${subCategoryIndex}`"
+                                @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                                :href="`${$root.baseUrl}/${selectedParentCategory.slug}/${selectedParentCategory.slug}`"
+                                :class="`category sub-category unset ${(selectedParentCategory.children.length > 0) ? 'fw6' : ''}`">
+
+                                <div
+                                    class="category-icon"
+                                    @mouseout="toggleSidebar(id, $event, 'mouseout')"
+                                    @mouseover="toggleSidebar(id, $event, 'mouseover')">
+
+                                    <img
+                                        v-if="selectedParentCategory.category_icon_path"
+                                        :src="`${$root.baseUrl}/storage/${subCategory.category_icon_path}`" />
+                                </div>
+                                <span class="category-title">{{ subCategory['name'] }}</span>
+                            </a>
+
+                            <ul type="none" class="nested">
+                                <li
+                                    :key="`${childSubCategoryIndex}-${subCategoryIndex}`"
+                                    v-for="(childSubCategory, childSubCategoryIndex) in subCategory.children">
+
+                                    <a
+                                        :id="`sidebar-level-link-3-${childSubCategoryIndex}`"
+                                        :class="`category unset ${(subCategory.children.length > 0) ? 'fw6' : ''}`"
+                                        :href="`${$root.baseUrl}/${selectedParentCategory.slug}/${subCategory.slug}/${childSubCategory.slug}`">
+                                        <span class="category-title">{{ childSubCategory.name }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
         </div>
     </nav>
     </div>
@@ -125,6 +112,7 @@
             return {
                 slicedCategories: [],
                 sidebarLevel: Math.floor(Math.random() * 1000),
+                selectedParentCategory:null
             }
         },
 
@@ -166,6 +154,9 @@
 
                 this.slicedCategories = slicedCategories;
             },
+            selectAParentCategory: function (category) {
+                this.selectedParentCategory = category;
+            }
         }
     }
 </script>
